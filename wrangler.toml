@@ -1,0 +1,8 @@
+name = "otel-yonetim"
+main = "src/worker.js"
+compatibility_date = "2026-02-01"
+type = "javascript"
+
+[[d1_databases]]
+binding = "otelvt"
+database_name = "otelvt"
