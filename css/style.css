@@ -93,3 +93,24 @@ body.login-page {
   padding: 30px;
   background: #f4f4f4;
 }
+
+/* Oda kartları */
+.room-card {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Durum renkleri */
+.status-available { background: green; }
+.status-occupied { background: red; }
+.status-reserved { background: orange; }
+.status-cleaning { background: yellow; color: black; }
