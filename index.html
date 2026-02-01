@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Otel Yönetim Sistemi | Giriş</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-box {
+      background: #fff;
+      width: 100%;
+      max-width: 380px;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    .login-box input:focus {
+      outline: none;
+      border-color: #2a5298;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #2a5298;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .login-box button:hover {
+      background: #1e3c72;
+    }
+
+    .error {
+      color: #d93025;
+      margin-top: 12px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 12px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>Otel Yönetim Sistemi</h2>
+
+    <input id="username" placeholder="Kullanıcı adı">
+    <input id="password" type="password" placeholder="Şifre">
+
+    <button type="button" onclick="login()">Giriş Yap</button>
+
+    <div id="error" class="error"></div>
+
+    <div class="footer">
+      © 2026 Hotel Management
+    </div>
+  </div>
+
+  <script>
+    async function login() {
+      document.getElementById("error").innerText = "";
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const res = await fetch("/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          document.getElementById("error").innerText = data.error;
+          return;
+        }
+
+        if (data.role === "admin") {
+          window.location.href = "/public/admin.html";
+        } else if (data.role === "reception") {
+          window.location.href = "/public/reception.html";
+        } else {
+          document.getElementById("error").innerText = "Yetki bulunamadı";
+        }
+
+      } catch (e) {
+        document.getElementById("error").innerText = "Sunucuya bağlanılamadı";
+      }
+    }
+  </script>
+
+</body>
+</html>
