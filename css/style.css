@@ -11,7 +11,7 @@ body {
 }
 
 /* --- LOGIN SAYFASI --- */
-.login-page {
+body.login-page {
   height: 100vh;
   display: flex;
   align-items: center;
