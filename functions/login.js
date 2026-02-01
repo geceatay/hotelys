@@ -1,21 +1,11 @@
-export async function onRequestPost(context) {
-  const { request, env } = context;
-
+export const onRequestPost = async ({ request, env }) => {
   try {
-    const body = await request.json();
-    const username = body.username;
-    const password = body.password;
+    const { username, password } = await request.json();
 
     if (!username || !password) {
       return new Response(
-        JSON.stringify({
-          success: false,
-          message: "Kullanıcı adı ve şifre zorunlu"
-        }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json" }
-        }
+        JSON.stringify({ success: false, message: "Eksik bilgi" }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
       );
     }
 
@@ -32,10 +22,7 @@ export async function onRequestPost(context) {
           success: false,
           message: "Kullanıcı adı veya şifre yanlış"
         }),
-        {
-          status: 401,
-          headers: { "Content-Type": "application/json" }
-        }
+        { status: 401, headers: { "Content-Type": "application/json" } }
       );
     }
 
@@ -48,4 +35,17 @@ export async function onRequestPost(context) {
           role: user.role
         }
       }),
-      {
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
+
+  } catch (e) {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message: "Sunucu hatası",
+        error: e.message
+      }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
+  }
+};
