@@ -27,4 +27,16 @@ export const onRequest = async ({ request, env }) => {
   if (method === "DELETE") {
     // Oda sil
     const pathParts = url.pathname.split("/"); // /api/rooms/:id
-    const id = pathParts[pathParts.length - 1]
+    const id = pathParts[pathParts.length - 1];
+    await env.otelvt
+      .prepare("DELETE FROM rooms WHERE id=?")
+      .bind(id)
+      .run();
+    return new Response(JSON.stringify({ success: true }), {
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
+  // Eğer metod GET/POST/DELETE değilse
+  return new Response("Method Not Allowed", { status: 405 });
+};
