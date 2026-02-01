@@ -1,12 +1,18 @@
 * {
   box-sizing: border-box;
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
+/* --- GENEL BODY --- */
 body {
-  margin: 0;
-  height: 100vh;
   background: linear-gradient(135deg, #1e3c72, #2a5298);
+}
+
+/* --- LOGIN SAYFASI --- */
+.login-page {
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,6 +61,7 @@ body {
   font-size: 14px;
 }
 
+/* --- ADMIN / PANEL SAYFASI --- */
 .panel-container {
   display: flex;
   height: 100vh;
@@ -84,4 +91,5 @@ body {
 .content {
   flex: 1;
   padding: 30px;
+  background: #f4f4f4;
 }
