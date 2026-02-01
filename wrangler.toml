@@ -1,9 +1,0 @@
-name = "otel-yonetim-sistemi"
-main = "src/worker.js"
-compatibility_date = "2024-11-01"
-[assets]
-directory = "./public"
-[[d1_databases]]
-binding = "DB"
-database_name = "hotelsql"
-database_id = "738892ad-bc2d-4d74-a199-b2f627ec1906"
